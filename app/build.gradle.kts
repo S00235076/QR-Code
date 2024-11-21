@@ -40,5 +40,5 @@ dependencies {
     testImplementation(libs.junit)
     androidTestImplementation(libs.ext.junit)
     androidTestImplementation(libs.espresso.core)
-    compile 'com.journeyapps:zxing-android-embedded:3.4.0'
+    implementation (libs.zxing.android.embedded)
 }
