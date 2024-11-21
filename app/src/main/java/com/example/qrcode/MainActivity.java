@@ -41,32 +41,31 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        // On scan of qr code, capture result
         IntentResult result = IntentIntegrator.parseActivityResult(requestCode, resultCode, data);
         if (result != null) {
-            //if qrcode has nothing in it
+            // Check if the result contains data
             if (result.getContents() == null) {
                 Toast.makeText(this, "Result Not Found", Toast.LENGTH_LONG).show();
             } else {
-                //if qr contains data
                 try {
-                    //converting the data to json
+                    // Convert contents from string to json so we can access individual fields
                     JSONObject obj = new JSONObject(result.getContents());
-                    //setting values to textviews
+
+                    // Read in title and website url then populate edit text elements
                     textViewName.setText(obj.getString("title"));
                     textViewAddress.setText(obj.getString("website"));
                 } catch (JSONException e) {
+                    // Log error/stack trace
                     e.printStackTrace();
-                    //if control comes here
-                    //that means the encoded format not matches
-                    //in this case you can display whatever data is available on the qrcode
-                    //to a toast
+
+                    // Alert user something went wrong
                     Toast.makeText(this, result.getContents(), Toast.LENGTH_LONG).show();
                 }
             }
         } else {
             super.onActivityResult(requestCode, resultCode, data);
         }
-
     }
     @Override
     public void onClick(View view) {
