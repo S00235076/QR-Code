@@ -1,17 +1,16 @@
 package com.example.qrcode;
 
 import android.os.Bundle;
+import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
-import androidx.activity.EdgeToEdge;
+import android.widget.Toast;
+
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.graphics.Insets;
-import androidx.core.view.ViewCompat;
-import androidx.core.view.WindowInsetsCompat;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements View.OnClickListener {
 
-    //View Objects
+    // View Objects
     private Button buttonScan;
     private TextView textViewName, textViewAddress;
 
@@ -20,9 +19,20 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        //View objects
-        buttonScan = (Button) findViewById(R.id.buttonScan);
-        textViewName = (TextView) findViewById(R.id.textViewName);
-        textViewAddress = (TextView) findViewById(R.id.textViewAddress);
+        // View objects
+        buttonScan = findViewById(R.id.buttonScan);
+        textViewName = findViewById(R.id.textViewName);
+        textViewAddress = findViewById(R.id.textViewAddress);
+
+        // Attach onclick listener
+        buttonScan.setOnClickListener(this);
+    }
+
+    @Override
+    public void onClick(View view) {
+        if (view.getId() == R.id.buttonScan) {
+
+            Toast.makeText(this, "Scan button clicked", Toast.LENGTH_SHORT).show();
+        }
     }
 }
